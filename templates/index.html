@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="TripGenix - Personalize your travel itineraries with our AI-powered recommendation engine.">
+    <title>TripGenix - AI Travel Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">TripGenix <span class="ai-badge">AI</span></div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#planner">Plan Trip</a>
+            <a href="#test">Reviews</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-landing">
+            <div class="hero-content">
+                <h1>Experience the World <br> Your Way</h1>
+                <p>Transforming travel with AI-powered personalized recommendations.</p>
+                <a href="#planner" class="btn-primary">Plan Your Trip</a>
+            </div>
+        </section>
+
+        <section class="categories-section">
+            <h2 class="section-title">Explore Top Categories</h2>
+            <div class="categories-grid">
+                <button class="cat-btn" onclick="setInterest('All')"><i class="fas fa-rocket"></i> All</button>
+                <button class="cat-btn" onclick="setInterest('Hill Station')"><i class="fas fa-mountain"></i> Hill
+                    Station</button>
+                <button class="cat-btn" onclick="setInterest('Beach')"><i class="fas fa-umbrella-beach"></i>
+                    Beach</button>
+                <button class="cat-btn" onclick="setInterest('Historical')"><i class="fas fa-landmark"></i>
+                    Historical</button>
+                <button class="cat-btn" onclick="setInterest('Waterfall')"><i class="fas fa-water"></i>
+                    Waterfall</button>
+                <button class="cat-btn" onclick="setInterest('Wildlife')"><i class="fas fa-paw"></i> Wildlife</button>
+                <button class="cat-btn" onclick="setInterest('Adventure')"><i class="fas fa-hiking"></i>
+                    Adventure</button>
+            </div>
+        </section>
+
+        <section class="why-section">
+            <h2 class="section-title">Why TripGenix?</h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>AI Powered</h3>
+                    <p>Sophisticated algorithms to match your interests perfectly.</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Personalized</h3>
+                    <p>Every itinerary is unique and built just for your needs.</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Instant Plans</h3>
+                    <p>Get a full multi-day travel plan in seconds, not hours.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="planner" class="planner-container">
+            <h2 class="section-title">Start Planning</h2>
+            <div class="planner-card">
+                <form id="tripForm" class="form-grid">
+                    <div class="form-group">
+                        <label>Budget Level</label>
+                        <select id="budget" name="budget">
+                            <option value="Low">Low (Budget Friendly)</option>
+                            <option value="Medium" selected>Medium (Standard)</option>
+                            <option value="High">High (Luxury)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Region</label>
+                        <input type="text" id="place" name="place" placeholder="e.g. South India">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Duration (Days)</label>
+                        <input type="number" id="days" name="days" value="3" min="1" max="15">
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Travel Interests</label>
+                        <input type="text" id="interests" name="interests" placeholder="e.g. Scuba, Snow, History">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Generate Itinerary <i class="fas fa-magic"></i></button>
+                </form>
+            </div>
+        </section>
+
+        <section id="results" class="results-container hidden">
+            <h2 class="section-title">Trending Right Now</h2>
+            <div id="recommendations-container" class="results-grid">
+                <!-- Dynamic Content -->
+            </div>
+        </section>
+
+        <section id="test" class="test-section">
+            <h2 class="section-title">What Our Travelers Say</h2>
+            <div class="test-grid">
+                <div class="test-card">
+                    <p>"TripGenix found me the perfect hidden gems in Kerala. The AI match was spot on!"</p>
+                    <div class="test-author">- Aditi, Bangalore</div>
+                </div>
+                <div class="test-card">
+                    <p>"The breakdown by categories like waterfalls and hills made planning so much easier."</p>
+                    <div class="test-author">- Rahul, Chennai</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo">TripGenix AI</div>
+        <div class="footer-nav">
+            <a href="#">About</a>
+            <a href="#">Destinations</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <p class="copyright">Developed for Academic Excellence | © 2026 TripGenix AI System</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
