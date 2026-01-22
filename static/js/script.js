@@ -1,9 +1,72 @@
+const stateDistricts = {
+    "Andhra Pradesh": ["Visakhapatnam", "Kadapa", "Kurnool", "Chittoor", "Anantapur"],
+    "Arunachal Pradesh": ["Tawang", "West Kameng", "Itanagar"],
+    "Assam": ["Golaghat", "Kamrup", "Jorhat", "Dibrugarh"],
+    "Bihar": ["Gaya", "Patna", "Nalanda", "Vaishali"],
+    "Chhattisgarh": ["Bastar", "Raipur", "Bilaspur"],
+    "Goa": ["North Goa", "South Goa"],
+    "Gujarat": ["Kutch", "Ahmedabad", "Junagadh", "Surat"],
+    "Haryana": ["Kurukshetra", "Gurugram", "Ambala"],
+    "Himachal Pradesh": ["Shimla", "Kullu", "Kangra", "Lahaul and Spiti"],
+    "Jharkhand": ["Latehar", "Ranchi", "East Singhbhum", "Deoghar"],
+    "Karnataka": ["Kodagu", "Vijayanagara", "Uttara Kannada", "Chikkamagaluru", "Chamarajanagar", "Bengaluru", "Mysore"],
+    "Kerala": ["Idukki", "Alappuzha", "Wayanad", "Thiruvananthapuram", "Thrissur", "Ernakulam", "Kottayam"],
+    "Madhya Pradesh": ["Chhatarpur", "Indore", "Bhopal", "Gwalior", "Jabalpur"],
+    "Maharashtra": ["Pune", "Mumbai City", "Aurangabad", "Nashik", "Ratnagiri", "Nagpur"],
+    "Manipur": ["Imphal West", "Bishnupur", "Churachandpur"],
+    "Meghalaya": ["East Khasi Hills", "West Jaintia Hills", "Ri-Bhoi"],
+    "Mizoram": ["Aizawl", "Lunglei", "Champhai"],
+    "Nagaland": ["Kohima", "Dimapur", "Mokokchung"],
+    "Odisha": ["Puri", "Khordha", "Ganjam", "Cuttack"],
+    "Punjab": ["Amritsar", "Ludhiana", "Patiala", "Jalandhar"],
+    "Rajasthan": ["Jaipur", "Udaipur", "Jaisalmer", "Jodhpur", "Ajmer"],
+    "Sikkim": ["East Sikkim", "North Sikkim", "West Sikkim"],
+    "Tamil Nadu": ["Nilgiris", "Dindigul", "Chengalpattu", "Salem", "Chennai", "Madurai", "Coimbatore"],
+    "Telangana": ["Hyderabad", "Vikarabad", "Mulugu", "Warangal"],
+    "Tripura": ["West Tripura", "South Tripura", "Dhalai"],
+    "Uttar Pradesh": ["Agra", "Lucknow", "Varanasi", "Prayagraj", "Mathura"],
+    "Uttarakhand": ["Nainital", "Dehradun", "Rishikesh", "Almora", "Haridwar"],
+    "West Bengal": ["Darjeeling", "Kolkata", "Kalimpong", "South 24 Parganas", "Shantiniketan"]
+};
+
+function initStates() {
+    const stateSelect = document.getElementById('state');
+    if (!stateSelect) return;
+    stateSelect.innerHTML = '<option value="All">All Over India</option>';
+    Object.keys(stateDistricts).sort().forEach(state => {
+        const option = document.createElement('option');
+        option.value = state;
+        option.textContent = state;
+        stateSelect.appendChild(option);
+    });
+}
+
+function updateDistricts() {
+    const stateSelect = document.getElementById('state');
+    const districtSelect = document.getElementById('district');
+    if (!stateSelect || !districtSelect) return;
+
+    const selectedState = stateSelect.value;
+    districtSelect.innerHTML = '<option value="All">All Districts</option>';
+
+    if (selectedState !== 'All' && stateDistricts[selectedState]) {
+        stateDistricts[selectedState].sort().forEach(dist => {
+            const option = document.createElement('option');
+            option.value = dist;
+            option.textContent = dist;
+            districtSelect.appendChild(option);
+        });
+    }
+}
+
 // Helper to set interest from category buttons
 function setInterest(interest) {
     const interestInput = document.getElementById('interests');
     interestInput.value = interest === 'All' ? 'Travel' : interest;
     document.getElementById('planner').scrollIntoView({ behavior: 'smooth' });
 }
+
+document.addEventListener('DOMContentLoaded', initStates);
 
 document.getElementById('tripForm').addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -19,7 +82,8 @@ document.getElementById('tripForm').addEventListener('submit', async function (e
 
     const formData = {
         budget: document.getElementById('budget').value,
-        place: document.getElementById('place').value,
+        state: document.getElementById('state').value,
+        district: document.getElementById('district').value,
         days: document.getElementById('days').value,
         interests: document.getElementById('interests').value
     };

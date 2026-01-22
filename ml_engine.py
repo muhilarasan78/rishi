@@ -26,24 +26,33 @@ class RecommendationEngine:
         self.tfidf = TfidfVectorizer(stop_words='english')
         self.tfidf_matrix = self.tfidf.fit_transform(self.df['Content'])
 
-    def get_recommendations(self, region, budget, interests, days=3):
+    def get_recommendations(self, state, district, budget, interests, days=3):
         # Start with full dataset
         recommendations = self.df.copy()
         
-        # Soft filter by Region
-        if region:
-            region_matches = recommendations[recommendations['Region'].str.contains(region, case=False, na=False)]
-            if not region_matches.empty:
-                recommendations = region_matches
+        # Soft filter by State
+        if state and state != 'All':
+            state_matches = recommendations[recommendations['State'].str.contains(state, case=False, na=False)]
+            if not state_matches.empty:
+                recommendations = state_matches
+
+        # Soft filter by District
+        if district and district != 'All':
+            dist_matches = recommendations[recommendations['District'].str.contains(district, case=False, na=False)]
+            if not dist_matches.empty:
+                recommendations = dist_matches
 
         # Compute Similarity (ML Logic)
         user_profile = interests if interests else "travel"
         user_tfidf = self.tfidf.transform([user_profile.lower()])
         cosine_sim = linear_kernel(user_tfidf, self.tfidf_matrix)
         
-        # Rank by ML scores
-        self.df['similarity'] = cosine_sim[0]
-        results = recommendations.merge(self.df[['Place', 'similarity']], on='Place', suffixes=('', '_new'))
+        # Merge similarity scores back to the dataframe
+        merged_df = self.df[['Place']].copy()
+        merged_df['similarity'] = cosine_sim[0]
+        
+        # Rank the filtered recommendations
+        results = recommendations.merge(merged_df, on='Place')
         
         # Strict Budget filtering
         if budget:

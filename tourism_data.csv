@@ -1,31 +1,53 @@
-Place,Region,Tags,Budget,Description,Price_Day
-Goa,West India,"Beach, Party, Relaxation, Nightlife",Medium,"Experience the amazing Beach, Party, Relaxation, Nightlife at Goa. Perfect for a Medium budget trip.",5000
-Manali,North India,"Adventure, Nature, Snow, Mountains",Low,"Experience the amazing Adventure, Nature, Snow, Mountains at Manali. Perfect for a Low budget trip.",2000
-Kerala (Alleppey),South India,"Nature, Backwaters, Relaxation, Boat",Medium,"Experience the amazing Nature, Backwaters, Relaxation, Boat at Kerala (Alleppey). Perfect for a Medium budget trip.",5000
-Jaipur,North India,"Culture, History, Forts, City",Medium,"Experience the amazing Culture, History, Forts, City at Jaipur. Perfect for a Medium budget trip.",5000
-Leh Ladakh,North India,"Adventure, Mountains, Bike, Nature",High,"Experience the amazing Adventure, Mountains, Bike, Nature at Leh Ladakh. Perfect for a High budget trip.",10000
-Andaman Islands,South India,"Beach, Scuba, Nature, Relaxation",High,"Experience the amazing Beach, Scuba, Nature, Relaxation at Andaman Islands. Perfect for a High budget trip.",10000
-Rishikesh,North India,"Adventure, Spiritual, River, Nature",Low,"Experience the amazing Adventure, Spiritual, River, Nature at Rishikesh. Perfect for a Low budget trip.",2000
-Varanasi,North India,"Spiritual, Culture, History, City",Low,"Experience the amazing Spiritual, Culture, History, City at Varanasi. Perfect for a Low budget trip.",2000
-Munnar,South India,"Nature, Tea Gardens, Mountains, Relaxation",Medium,"Experience the amazing Nature, Tea Gardens, Mountains, Relaxation at Munnar. Perfect for a Medium budget trip.",5000
-Udaipur,West India,"Culture, Lakes, History, Romantic",High,"Experience the amazing Culture, Lakes, History, Romantic at Udaipur. Perfect for a High budget trip.",10000
-Darjeeling,East India,"Nature, Mountains, Tea, Culture",Medium,"Experience the amazing Nature, Mountains, Tea, Culture at Darjeeling. Perfect for a Medium budget trip.",5000
-Hampi,South India,"History, Ruins, Culture, Backpacking",Low,"Experience the amazing History, Ruins, Culture, Backpacking at Hampi. Perfect for a Low budget trip.",2000
-Coorg,South India,"Nature, Coffee, Mountains, Relaxation",Medium,"Experience the amazing Nature, Coffee, Mountains, Relaxation at Coorg. Perfect for a Medium budget trip.",5000
-Pondicherry,South India,"Beach, Culture, French, Relaxation",Medium,"Experience the amazing Beach, Culture, French, Relaxation at Pondicherry. Perfect for a Medium budget trip.",5000
-Jaisalmer,West India,"Desert, Culture, History, Adventure",Medium,"Experience the amazing Desert, Culture, History, Adventure at Jaisalmer. Perfect for a Medium budget trip.",5000
-Shimla,North India,"Mountains, Colonial, Nature, City",Medium,"Experience the amazing Mountains, Colonial, Nature, City at Shimla. Perfect for a Medium budget trip.",5000
-Kolkata,East India,"City, Culture, History, Food",Low,"Experience the amazing City, Culture, History, Food at Kolkata. Perfect for a Low budget trip.",2000
-Mumbai,West India,"City, Nightlife, Beach, Bollywood",High,"Experience the amazing City, Nightlife, Beach, Bollywood at Mumbai. Perfect for a High budget trip.",10000
-Ooty,South India,"Mountains, Nature, Lake, Family",Medium,"Experience the amazing Mountains, Nature, Lake, Family at Ooty. Perfect for a Medium budget trip.",5000
-Sikkim,East India,"Nature, Mountains, Monastery, Adventure",Medium,"Experience the amazing Nature, Mountains, Monastery, Adventure at Sikkim. Perfect for a Medium budget trip.",5000
-Mysore,South India,"Culture, Palace, History, City",Low,"Experience the amazing Culture, Palace, History, City at Mysore. Perfect for a Low budget trip.",2000
-Agra,North India,"Taj Mahal, History, Culture, Landmark",Medium,"Experience the amazing Taj Mahal, History, Culture, Landmark at Agra. Perfect for a Medium budget trip.",5000
-Gulmarg,North India,"Snow, Skiing, Mountains, Nature",High,"Experience the amazing Snow, Skiing, Mountains, Nature at Gulmarg. Perfect for a High budget trip.",10000
-Rann of Kutch,West India,"Desert, Culture, Festival, Unique",Medium,"Experience the amazing Desert, Culture, Festival, Unique at Rann of Kutch. Perfect for a Medium budget trip.",5000
-Khajuraho,Central India,"History, Temples, Culture, Art",Medium,"Experience the amazing History, Temples, Culture, Art at Khajuraho. Perfect for a Medium budget trip.",5000
-Ajanta Ellora,West India,"History, Caves, Ancient, Culture",Low,"Experience the amazing History, Caves, Ancient, Culture at Ajanta Ellora. Perfect for a Low budget trip.",2000
-Spiti Valley,North India,"Adventure, Remote, Mountains, Nature",High,"Experience the amazing Adventure, Remote, Mountains, Nature at Spiti Valley. Perfect for a High budget trip.",10000
-Wayanad,South India,"Nature, Wildlife, Mountains, Greenery",Low,"Experience the amazing Nature, Wildlife, Mountains, Greenery at Wayanad. Perfect for a Low budget trip.",2000
-Cherrapunji,East India,"Nature, Rain, Waterfalls, Greenery",Medium,"Experience the amazing Nature, Rain, Waterfalls, Greenery at Cherrapunji. Perfect for a Medium budget trip.",5000
-Mount Abu,West India,"Hill Station, Temples, Nature, Lake",Low,"Experience the amazing Hill Station, Temples, Nature, Lake at Mount Abu. Perfect for a Low budget trip.",2000
+Place,State,District,Tags,Budget,Region,Description,Price_Day
+Ooty,Tamil Nadu,Nilgiris,"Hill Station, Nature, Mountains, Tea Gardens",Medium,South India,"Discover the beauty of Ooty in Nilgiris, Tamil Nadu. A perfect spot for Hill Station, Nature, Mountains, Tea Gardens.",5000
+Kodaikanal,Tamil Nadu,Dindigul,"Hill Station, Lake, Nature, Relaxation",Medium,South India,"Discover the beauty of Kodaikanal in Dindigul, Tamil Nadu. A perfect spot for Hill Station, Lake, Nature, Relaxation.",5000
+Mahabalipuram,Tamil Nadu,Chengalpattu,"Heritage, Beach, History, Architecture",Low,South India,"Discover the beauty of Mahabalipuram in Chengalpattu, Tamil Nadu. A perfect spot for Heritage, Beach, History, Architecture.",2000
+Yercaud,Tamil Nadu,Salem,"Hill Station, Nature, Budget Friendly",Low,South India,"Discover the beauty of Yercaud in Salem, Tamil Nadu. A perfect spot for Hill Station, Nature, Budget Friendly.",2000
+Marina Beach,Tamil Nadu,Chennai,"Beach, City, Landmark, Evening Walk",Low,South India,"Discover the beauty of Marina Beach in Chennai, Tamil Nadu. A perfect spot for Beach, City, Landmark, Evening Walk.",2000
+Munnar,Kerala,Idukki,"Nature, Tea Gardens, Mountains, Honeymoon",Medium,South India,"Discover the beauty of Munnar in Idukki, Kerala. A perfect spot for Nature, Tea Gardens, Mountains, Honeymoon.",5000
+Alleppey Backwaters,Kerala,Alappuzha,"Nature, Backwaters, Houseboat, Relaxation",High,South India,"Discover the beauty of Alleppey Backwaters in Alappuzha, Kerala. A perfect spot for Nature, Backwaters, Houseboat, Relaxation.",10000
+Wayanad,Kerala,Wayanad,"Nature, Wildlife, Waterfall, Trekking",Medium,South India,"Discover the beauty of Wayanad in Wayanad, Kerala. A perfect spot for Nature, Wildlife, Waterfall, Trekking.",5000
+Varkala Beach,Kerala,Thiruvananthapuram,"Beach, Cliff, Relaxation, Adventure",Medium,South India,"Discover the beauty of Varkala Beach in Thiruvananthapuram, Kerala. A perfect spot for Beach, Cliff, Relaxation, Adventure.",5000
+Athirappilly Falls,Kerala,Thrissur,"Nature, Waterfall, Photography, Forest",Low,South India,"Discover the beauty of Athirappilly Falls in Thrissur, Kerala. A perfect spot for Nature, Waterfall, Photography, Forest.",2000
+Coorg,Karnataka,Kodagu,"Nature, Coffee Estates, Mountains, Relax",Medium,South India,"Discover the beauty of Coorg in Kodagu, Karnataka. A perfect spot for Nature, Coffee Estates, Mountains, Relax.",5000
+Hampi,Karnataka,Vijayanagara,"Heritage, History, Ruins, Culture",Low,South India,"Discover the beauty of Hampi in Vijayanagara, Karnataka. A perfect spot for Heritage, History, Ruins, Culture.",2000
+Gokarna,Karnataka,Uttara Kannada,"Beach, Relax, Hippie, Nature",Low,South India,"Discover the beauty of Gokarna in Uttara Kannada, Karnataka. A perfect spot for Beach, Relax, Hippie, Nature.",2000
+Chikkamagaluru,Karnataka,Chikkamagaluru,"Nature, Coffee, Mountains, Trekking",Medium,South India,"Discover the beauty of Chikkamagaluru in Chikkamagaluru, Karnataka. A perfect spot for Nature, Coffee, Mountains, Trekking.",5000
+Bandipur,Karnataka,Chamarajanagar,"Wildlife, Safari, Nature, Adventure",High,South India,"Discover the beauty of Bandipur in Chamarajanagar, Karnataka. A perfect spot for Wildlife, Safari, Nature, Adventure.",10000
+Araku Valley,Andhra Pradesh,Visakhapatnam,"Nature, Hills, Coffee, Tribes",Low,South India,"Discover the beauty of Araku Valley in Visakhapatnam, Andhra Pradesh. A perfect spot for Nature, Hills, Coffee, Tribes.",2000
+Gandikota,Andhra Pradesh,Kadapa,"Nature, Adventure, Grand Canyon, History",Low,South India,"Discover the beauty of Gandikota in Kadapa, Andhra Pradesh. A perfect spot for Nature, Adventure, Grand Canyon, History.",2000
+Vizag Beaches,Andhra Pradesh,Visakhapatnam,"Beach, City, Port, Nature",Medium,South India,"Discover the beauty of Vizag Beaches in Visakhapatnam, Andhra Pradesh. A perfect spot for Beach, City, Port, Nature.",5000
+Hyderabad,Telangana,Hyderabad,"City, Culture, History, Food",Medium,South India,"Discover the beauty of Hyderabad in Hyderabad, Telangana. A perfect spot for City, Culture, History, Food.",5000
+Ananthagiri Hills,Telangana,Vikarabad,"Hill Station, Nature, Trekking",Low,South India,"Discover the beauty of Ananthagiri Hills in Vikarabad, Telangana. A perfect spot for Hill Station, Nature, Trekking.",2000
+Shimla,Himachal Pradesh,Shimla,"Hill Station, Snow, Mountains, Colonial",Medium,North India,"Discover the beauty of Shimla in Shimla, Himachal Pradesh. A perfect spot for Hill Station, Snow, Mountains, Colonial.",5000
+Manali,Himachal Pradesh,Kullu,"Hill Station, Adventure, Snow, Honeymoon",Medium,North India,"Discover the beauty of Manali in Kullu, Himachal Pradesh. A perfect spot for Hill Station, Adventure, Snow, Honeymoon.",5000
+Dharamshala,Himachal Pradesh,Kangra,"Hill Station, Culture, Mountains, Dalai Lama",Low,North India,"Discover the beauty of Dharamshala in Kangra, Himachal Pradesh. A perfect spot for Hill Station, Culture, Mountains, Dalai Lama.",2000
+Nainital,Uttarakhand,Nainital,"Hill Station, Lake, Nature, Family",Medium,North India,"Discover the beauty of Nainital in Nainital, Uttarakhand. A perfect spot for Hill Station, Lake, Nature, Family.",5000
+Rishikesh,Uttarakhand,Dehradun,"Adventure, River, Nature, Spiritual",Low,North India,"Discover the beauty of Rishikesh in Dehradun, Uttarakhand. A perfect spot for Adventure, River, Nature, Spiritual.",2000
+Jaipur,Rajasthan,Jaipur,"City, History, Forts, Culture",Medium,North India,"Discover the beauty of Jaipur in Jaipur, Rajasthan. A perfect spot for City, History, Forts, Culture.",5000
+Udaipur,Rajasthan,Udaipur,"City, Lake, History, Romantic",High,North India,"Discover the beauty of Udaipur in Udaipur, Rajasthan. A perfect spot for City, Lake, History, Romantic.",10000
+Jaisalmer,Rajasthan,Jaisalmer,"Desert, Safari, History, Culture",Medium,North India,"Discover the beauty of Jaisalmer in Jaisalmer, Rajasthan. A perfect spot for Desert, Safari, History, Culture.",5000
+Calangute,Goa,North Goa,"Beach, Party, Nightlife, Shopping",Medium,South India,"Discover the beauty of Calangute in North Goa, Goa. A perfect spot for Beach, Party, Nightlife, Shopping.",5000
+Palolem,Goa,South Goa,"Beach, Quiet, Relax, Nature",Medium,South India,"Discover the beauty of Palolem in South Goa, Goa. A perfect spot for Beach, Quiet, Relax, Nature.",5000
+Lonavala,Maharashtra,Pune,"Hill Station, Nature, Monsoon, Weekend",Low,Central India,"Discover the beauty of Lonavala in Pune, Maharashtra. A perfect spot for Hill Station, Nature, Monsoon, Weekend.",2000
+Mumbai (Colaba),Maharashtra,Mumbai City,"City, Sea, History, Shopping",High,Central India,"Discover the beauty of Mumbai (Colaba) in Mumbai City, Maharashtra. A perfect spot for City, Sea, History, Shopping.",10000
+Darjeeling,West Bengal,Darjeeling,"Hill Station, Tea, Mountains, Toy Train",Medium,East India,"Discover the beauty of Darjeeling in Darjeeling, West Bengal. A perfect spot for Hill Station, Tea, Mountains, Toy Train.",5000
+Gangtok,Sikkim,East Sikkim,"Hill Station, Nature, Mountains, Monastery",Medium,East India,"Discover the beauty of Gangtok in East Sikkim, Sikkim. A perfect spot for Hill Station, Nature, Mountains, Monastery.",5000
+Gulmarg,Jammu & Kashmir,Baramulla,"Snow, Skiing, Mountains, Nature",High,North India,"Discover the beauty of Gulmarg in Baramulla, Jammu & Kashmir. A perfect spot for Snow, Skiing, Mountains, Nature.",10000
+Srinagar,Jammu & Kashmir,Srinagar,"Nature, Lake, Houseboat, Mountains",High,North India,"Discover the beauty of Srinagar in Srinagar, Jammu & Kashmir. A perfect spot for Nature, Lake, Houseboat, Mountains.",10000
+Tawang,Arunachal Pradesh,Tawang,"Mountains, Nature, Monastery, High Altitude",High,East India,"Discover the beauty of Tawang in Tawang, Arunachal Pradesh. A perfect spot for Mountains, Nature, Monastery, High Altitude.",10000
+Kaziranga,Assam,Golaghat,"Wildlife, Safari, Rhino, Nature",Medium,East India,"Discover the beauty of Kaziranga in Golaghat, Assam. A perfect spot for Wildlife, Safari, Rhino, Nature.",5000
+Bodh Gaya,Bihar,Gaya,"History, Culture, Spiritual, Landmark",Low,East India,"Discover the beauty of Bodh Gaya in Gaya, Bihar. A perfect spot for History, Culture, Spiritual, Landmark.",2000
+Bastar,Chhattisgarh,Bastar,"Nature, Waterfalls, Tribes, Culture",Low,Central India,"Discover the beauty of Bastar in Bastar, Chhattisgarh. A perfect spot for Nature, Waterfalls, Tribes, Culture.",2000
+Rann of Kutch,Gujarat,Kutch,"Desert, Culture, Festival, Unique",Medium,Central India,"Discover the beauty of Rann of Kutch in Kutch, Gujarat. A perfect spot for Desert, Culture, Festival, Unique.",5000
+Kurukshetra,Haryana,Kurukshetra,"History, Landmark, Museum",Low,North India,"Discover the beauty of Kurukshetra in Kurukshetra, Haryana. A perfect spot for History, Landmark, Museum.",2000
+Netarhat,Jharkhand,Latehar,"Nature, Hill Station, Sunset",Low,East India,"Discover the beauty of Netarhat in Latehar, Jharkhand. A perfect spot for Nature, Hill Station, Sunset.",2000
+Khajuraho,Madhya Pradesh,Chhatarpur,"History, Architecture, Heritage",Medium,Central India,"Discover the beauty of Khajuraho in Chhatarpur, Madhya Pradesh. A perfect spot for History, Architecture, Heritage.",5000
+Imphal,Manipur,Imphal West,"City, Culture, Lake, Nature",Low,Central India,"Discover the beauty of Imphal in Imphal West, Manipur. A perfect spot for City, Culture, Lake, Nature.",2000
+Shillong,Meghalaya,East Khasi Hills,"Hill Station, Nature, Waterfalls, Music",Medium,East India,"Discover the beauty of Shillong in East Khasi Hills, Meghalaya. A perfect spot for Hill Station, Nature, Waterfalls, Music.",5000
+Aizawl,Mizoram,Aizawl,"Hill Station, Nature, Culture",Low,East India,"Discover the beauty of Aizawl in Aizawl, Mizoram. A perfect spot for Hill Station, Nature, Culture.",2000
+Kohima,Nagaland,Kohima,"Hill Station, Culture, History, War Cemetery",Low,East India,"Discover the beauty of Kohima in Kohima, Nagaland. A perfect spot for Hill Station, Culture, History, War Cemetery.",2000
+Puri Beach,Odisha,Puri,"Beach, Nature, Relaxation",Low,East India,"Discover the beauty of Puri Beach in Puri, Odisha. A perfect spot for Beach, Nature, Relaxation.",2000
+Amritsar,Punjab,Amritsar,"City, Culture, History, Food",Low,North India,"Discover the beauty of Amritsar in Amritsar, Punjab. A perfect spot for City, Culture, History, Food.",2000
+Agartala,Tripura,West Tripura,"City, Palace, Culture, History",Low,East India,"Discover the beauty of Agartala in West Tripura, Tripura. A perfect spot for City, Palace, Culture, History.",2000
+Agra,Uttar Pradesh,Agra,"History, Taj Mahal, Seventh Wonder, City",Medium,North India,"Discover the beauty of Agra in Agra, Uttar Pradesh. A perfect spot for History, Taj Mahal, Seventh Wonder, City.",5000

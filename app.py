@@ -24,11 +24,18 @@ def home():
 def recommend():
     data = request.json
     budget = data.get('budget', '')
-    place = data.get('place', '')
+    state = data.get('state', '')
+    district = data.get('district', '')
     days = data.get('days', 3)
     interests = data.get('interests', '')
     
-    recommendations = engine.get_recommendations(region=place, budget=budget, interests=interests, days=days)
+    recommendations = engine.get_recommendations(
+        state=state, 
+        district=district, 
+        budget=budget, 
+        interests=interests, 
+        days=days
+    )
     
     return jsonify(recommendations)
 

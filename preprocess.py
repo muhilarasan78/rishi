@@ -17,8 +17,8 @@ def preprocess_data(input_file="tourism_data.csv", output_file="preprocessed_tou
     df = df.fillna('')
 
     # Feature Engineering: Combine text fields for TF-IDF
-    # We combine Tags, Description, and Region to capture all relevant metadata
-    df['Content'] = df['Tags'] + " " + df['Description'] + " " + df['Region']
+    # We combine Tags, Description, Region, State, and District for comprehensive metadata
+    df['Content'] = df['Tags'] + " " + df['Description'] + " " + df['Region'] + " " + df['State'] + " " + df['District']
     
     # Normalize text (optional, but good practice)
     df['Content'] = df['Content'].str.lower()
