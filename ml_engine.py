@@ -67,6 +67,20 @@ class RecommendationEngine:
             
         return top_results
 
+    def get_all_states(self):
+        """Returns a sorted list of all unique states in the dataset."""
+        return sorted(self.df['State'].unique().tolist())
+
+    def get_destinations_by_state(self, state_name):
+        """Returns all destinations for a specific state."""
+        results = self.df[self.df['State'].str.lower() == state_name.lower()].copy()
+        top_results = results.to_dict('records')
+        
+        for res in top_results:
+            res['Itinerary'] = self._generate_itinerary(res, 3) # Default 3 days for preview
+            
+        return top_results
+
     def _generate_itinerary(self, place_data, days):
         """
         Rule-based itinerary generation based on destination metadata (Tags/Budget).

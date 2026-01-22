@@ -39,6 +39,16 @@ def recommend():
     
     return jsonify(recommendations)
 
+@app.route('/states')
+def states_directory():
+    all_states = engine.get_all_states()
+    return render_template('states.html', states=all_states)
+
+@app.route('/state/<state_name>')
+def state_detail(state_name):
+    destinations = engine.get_destinations_by_state(state_name)
+    return render_template('state_detail.html', state_name=state_name, destinations=destinations)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
 

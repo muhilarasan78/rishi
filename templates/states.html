@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore States - TripGenix AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .states-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 4rem 8%;
+        }
+
+        .state-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .state-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .state-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .state-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .back-link {
+            padding: 2rem 8%;
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body style="background: var(--bg-light);">
+    <header>
+        <div class="logo">TripGenix <span class="ai-badge">AI</span></div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/states">States</a>
+        </nav>
+    </header>
+
+    <main>
+        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Planner</a>
+        <section style="text-align: center; padding-top: 2rem;">
+            <h1 style="font-size: 3rem; font-weight: 800; color: var(--text-main);">Explore India by State</h1>
+            <p style="color: var(--text-muted);">Select a state to discover its hidden treasures and AI-planned
+                itineraries.</p>
+        </section>
+
+        <div class="states-grid">
+            {% for state in states %}
+            <a href="/state/{{ state }}" class="state-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>{{ state }}</h3>
+                <span style="color: var(--primary); font-weight: 600;">View Destinations <i class="fas fa-chevron-right"
+                        style="font-size: 0.8rem;"></i></span>
+            </a>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <p class="copyright">Developed for Academic Excellence | © 2026 TripGenix AI System</p>
+    </footer>
+</body>
+
+</html>

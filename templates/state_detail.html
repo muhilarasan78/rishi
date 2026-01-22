@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ state_name }} - Explore with TripGenix AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .detail-header {
+            padding: 6rem 8%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 3rem;
+        }
+
+        .dest-container {
+            padding: 0 8% 4rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .back-nav {
+            padding: 2rem 8%;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body style="background: var(--bg-light);">
+    <header>
+        <div class="logo">TripGenix <span class="ai-badge">AI</span></div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/states">States</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="back-nav">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+            <a href="/states">States</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+            <span style="color: var(--primary); font-weight: 800;">{{ state_name }}</span>
+        </div>
+
+        <section class="detail-header">
+            <h1 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem;">{{ state_name }}</h1>
+            <p style="font-size: 1.2rem; opacity: 0.9;">Discover curated destinations and AI-powered plans for {{
+                state_name }}.</p>
+        </section>
+
+        <div class="dest-container">
+            {% if not destinations %}
+            <div style="text-align: center; padding: 4rem;">
+                <p>No destinations found for this state yet. We are constantly expanding our database!</p>
+            </div>
+            {% endif %}
+
+            <div class="results-grid" style="grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));">
+                {% for place in destinations %}
+                <div class="destination-card" style="opacity: 1; transform: none;">
+                    <div class="card-img">
+                        <img src="https://source.unsplash.com/featured/800x600?{{ place.Place.split(' ')[0] }},travel&sig={{ loop.index }}"
+                            alt="{{ place.Place }}"
+                            onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80'">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ place.Place }}</h3>
+                        <div class="tag-list">
+                            {% for tag in place.Tags.split(',') %}
+                            <span class="tag-pill">{{ tag.strip() }}</span>
+                            {% endfor %}
+                        </div>
+                        <p class="card-desc">{{ place.Description }}</p>
+
+                        <div class="itinerary-section">
+                            <h4><i class="fas fa-route"></i> Suggested Plan</h4>
+                            {% for day in place.Itinerary %}
+                            <div class="day-item {% if loop.index == 1 %}active{% endif %}">
+                                <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
+                                    <span>Day {{ day.Day }}: Highlights</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="day-body">
+                                    <p><strong>Morning:</strong> {{ day.Morning }}</p>
+                                    <p><strong>Afternoon:</strong> {{ day.Afternoon }}</p>
+                                    <p><strong>Evening:</strong> {{ day.Evening }}</p>
+                                    <div
+                                        style="margin-top:10px; padding:10px; background:var(--bg-light); border-radius:8px; font-weight:600; font-size: 0.85rem;">
+                                        <i class="fas fa-hotel"></i> Stay: {{ day.Hotel }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div
+                            style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem;">
+                            <span style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">₹{{
+                                place.Price_Day }}/day</span>
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ place.Place }}, {{ state_name }}"
+                                target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">
+                                <i class="fas fa-map-marked-alt"></i> Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer style="margin-top: 4rem;">
+        <p class="copyright">Developed for Academic Excellence | © 2026 TripGenix AI System</p>
+    </footer>
+</body>
+
+</html>
