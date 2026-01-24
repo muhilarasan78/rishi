@@ -75,9 +75,14 @@
                 {% for place in destinations %}
                 <div class="destination-card" style="opacity: 1; transform: none;">
                     <div class="card-img">
-                        <img src="https://source.unsplash.com/featured/800x600?{{ place.Place.split(' ')[0] }},travel&sig={{ loop.index }}"
+                        {% if place.Image %}
+                        <img src="{{ place.Image }}" alt="{{ place.Place }}"
+                            onerror="this.onerror=null; this.src='https://picsum.photos/seed/{{ place.Place|replace(' ', '') }}/800/500';">
+                        {% else %}
+                        <img src="https://picsum.photos/seed/{{ place.Place|replace(' ', '') }}/800/500"
                             alt="{{ place.Place }}"
-                            onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80'">
+                            onerror="this.onerror=null; this.src='https://via.placeholder.com/800x500?text={{ place.Place }}';">
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{ place.Place }}</h3>
@@ -113,10 +118,17 @@
                             style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem;">
                             <span style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">₹{{
                                 place.Price_Day }}/day</span>
+                            {% if place.Map_Link %}
+                            <a href="{{ place.Map_Link }}" target="_blank"
+                                style="color: var(--primary); text-decoration: none; font-weight: 700;">
+                                <i class="fas fa-map-marked-alt"></i> Maps
+                            </a>
+                            {% else %}
                             <a href="https://www.google.com/maps/search/?api=1&query={{ place.Place }}, {{ state_name }}"
                                 target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">
                                 <i class="fas fa-map-marked-alt"></i> Maps
                             </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

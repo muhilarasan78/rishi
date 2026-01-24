@@ -1,96 +1,204 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import linear_kernel
-import random
+from sklearn.neighbors import NearestNeighbors
 import os
+import numpy as np
+import random
+from api_manager import TripGenixAPIManager
 
 class RecommendationEngine:
     """
-    1. Implement RecommendationEngine class
-    Handles data loading, ML-based ranking, and itinerary generation.
+    TripGenix Recommendation Engine (KNN Powered)
+    Uses TF-IDF Vectorization and K-Nearest Neighbors to find similar destinations.
     """
-    def __init__(self, data_path="preprocessed_tourism_data.csv"):
-        # Ensure preprocessed data exists
+    def __init__(self, data_path="tourism_data.csv"):
+        # Ensure data exists; if not, generate it (which also enriches it)
         if not os.path.exists(data_path):
-            import preprocess
-            preprocess.preprocess_data()
+            import data_generator
+            data_generator.generate_data()
             
         self.df = pd.read_csv(data_path)
+        
+        # Ensure Combined_Features exists (backward compatibility or regeneration)
+        if 'Combined_Features' not in self.df.columns:
+            # Fallback creation if for some reason csv is old
+            self.df['Combined_Features'] = (
+                self.df['Category'].fillna('') + " " + 
+                self.df['Activities'].fillna('') + " " + 
+                self.df['Budget'].fillna('') + " " + 
+                self.df['State'].fillna('')
+            )
+
         self._initialize_ml()
+        self.api_manager = TripGenixAPIManager()
 
     def _initialize_ml(self):
         """
-        2. Implement TF-IDF vectorization and Cosine Similarity logic
-        Prepares the vectorizer and fits it on the preprocessed content.
+        Train the KNN Model:
+        1. Vectorize 'Combined_Features' using TF-IDF.
+        2. Fit NearestNeighbors model on the vectors.
         """
         self.tfidf = TfidfVectorizer(stop_words='english')
-        self.tfidf_matrix = self.tfidf.fit_transform(self.df['Content'])
+        self.tfidf_matrix = self.tfidf.fit_transform(self.df['Combined_Features'].fillna(''))
+        
+        # KNN Model
+        # Metric: cosine distance (1 - cosine similarity)
+        # Algorithm: brute is good for smaller datasets, auto works generally
+        self.knn = NearestNeighbors(n_neighbors=10, metric='cosine', algorithm='brute')
+        self.knn.fit(self.tfidf_matrix)
 
     def get_recommendations(self, state, district, budget, interests, days=3):
-        # Start with full dataset
-        recommendations = self.df.copy()
+        """
+        KNN-based recommendation:
+        1. Create a query vector from user inputs.
+        2. Find K-nearest neighbors.
+        3. Rank and filter results.
+        """
         
-        # Soft filter by State
-        if state and state != 'All':
-            state_matches = recommendations[recommendations['State'].str.contains(state, case=False, na=False)]
-            if not state_matches.empty:
-                recommendations = state_matches
-
-        # Soft filter by District
-        if district and district != 'All':
-            dist_matches = recommendations[recommendations['District'].str.contains(district, case=False, na=False)]
-            if not dist_matches.empty:
-                recommendations = dist_matches
-
-        # Compute Similarity (ML Logic)
-        user_profile = interests if interests else "travel"
-        user_tfidf = self.tfidf.transform([user_profile.lower()])
-        cosine_sim = linear_kernel(user_tfidf, self.tfidf_matrix)
+        # 1. Construct User Query
+        # "Beach Relaxing Low Kerala"
+        query_text = f"{interests} {budget} {state if state != 'All' else ''} {district if district != 'All' else ''}"
+        query_vec = self.tfidf.transform([query_text])
         
-        # Merge similarity scores back to the dataframe
-        merged_df = self.df[['Place']].copy()
-        merged_df['similarity'] = cosine_sim[0]
+        # 2. Find Neighbors
+        # Returns distances and indices of the nearest neighbors
+        # We ask for more than we need (e.g., 20) to allow for post-filtering
+        n_neighbors = min(20, len(self.df))
+        distances, indices = self.knn.kneighbors(query_vec, n_neighbors=n_neighbors)
         
-        # Rank the filtered recommendations
-        results = recommendations.merge(merged_df, on='Place')
+        # 3. Process Results
+        candidates = self.df.iloc[indices[0]].copy()
+        candidates['distance'] = distances[0]
+        # Convert distance to similarity score (1 - distance) for display
+        candidates['score'] = 1 - candidates['distance']
         
-        # Strict Budget filtering
+        # 4. Apply Hard/Soft Filters
+        # Even though KNN finds "similar" items, we might want to strictly enforce budget if user desires.
+        # However, prompts say "Recommendation", so maybe just rank them.
+        # Let's strictly filter budget if provided, as that's a hard constraint for many.
         if budget:
-            results = results[results['Budget'].str.lower() == budget.lower()]
-            
-        results = results.sort_values(by='similarity', ascending=False)
-        top_results = results.head(5).to_dict('records')
+             candidates = candidates[candidates['Budget'].str.lower() == budget.lower()]
+             
+        # If no candidates left after filtering, revert to top KNN results (soft filter fallback)
+        if candidates.empty:
+            candidates = self.df.iloc[indices[0]].copy()
+            candidates['distance'] = distances[0]
+            candidates['score'] = 1 - candidates['distance']
+
+        # 5. Select Top Results
+        top_results = candidates.head(5).to_dict('records')
         
-        # 3. Implement itinerary generation logic (rules + ML results)
+        # 6. Enrich Layout
+        results = []
         for res in top_results:
-            res['Itinerary'] = self._generate_itinerary(res, int(days))
+            # We already have data in CSV, but let's ensure structure matches frontend expectations
             
-        return top_results
+            # Dynamic re-enrichment (optional, but good for freshness if cache expired)
+            # Since data_generator already did it, we primarily trust csv, 
+            # but we can call api_manager if fields are missing.
+            
+            # Generate Itinerary
+            itinerary = self._generate_itinerary(res, int(days))
+            
+            result_item = {
+                "name": res['Place'],
+                "score": round(res['score'], 2),
+                "category": res['Category'],
+                "budget": res['Budget'],
+                "map": res.get('Map_Link', ''),
+                "images": [res['Image']] if pd.notna(res['Image']) else [],
+                "about": res.get('Description', ''),
+                "Tags": res.get('Activities', ''), # Mapping Activities to Tags for frontend pill display
+                "Price_Day": res.get('Price_Day', 3000),
+                "Review": res.get('Review', 'A great place to visit!'),
+                "Rating": res.get('Rating', 4.5),
+                "Itinerary": itinerary,
+                
+                # Compatibility with legacy frontend fields just in case
+                "Place": res['Place'],
+                "Description": res.get('Description', ''),
+                "Image": res.get('Image', '')
+            }
+            results.append(result_item)
+            
+        return results
 
     def get_all_states(self):
-        """Returns a sorted list of all unique states in the dataset."""
         return sorted(self.df['State'].unique().tolist())
 
     def get_destinations_by_state(self, state_name):
-        """Returns all destinations for a specific state."""
         results = self.df[self.df['State'].str.lower() == state_name.lower()].copy()
         top_results = results.to_dict('records')
         
+        final_results = []
         for res in top_results:
-            res['Itinerary'] = self._generate_itinerary(res, 3) # Default 3 days for preview
+             itinerary = self._generate_itinerary(res, 3)
+             res['Itinerary'] = itinerary
+             res['name'] = res['Place'] # map for frontend
+             res['about'] = res.get('Description', '')
+             if 'Image' in res and pd.notna(res['Image']):
+                 res['images'] = [res['Image']]
+             res['map'] = res.get('Map_Link', '')
+             res['Tags'] = res.get('Activities', '')
+             final_results.append(res)
+             
+        return final_results
+
+    def get_place_details(self, place_name):
+        """
+        Retrieves full details for a specific place, including multiple images and hotels.
+        """
+        # Find place in dataframe
+        place_data = self.df[self.df['Place'].str.lower() == place_name.lower()]
+        
+        if place_data.empty:
+            return None
             
-        return top_results
+        res = place_data.iloc[0].to_dict()
+        
+        # Enrichment (Live) to get all images
+        enriched = self.api_manager.enrich_place(res['Place'])
+        
+        # Merge enrichment
+        res['images'] = enriched.get('images', []) if enriched else []
+        if not res['images'] and pd.notna(res.get('Image')):
+             res['images'] = [res['Image']]
+        
+        # Hotels: Fetch Real Data via OSM (Nominatim)
+        real_hotels = self.api_manager.get_hotels(res['Place'])
+        
+        if real_hotels:
+            # Sort by Rating (Desc) and Price (Asc)
+            # Tuple sort: (-rating, price)
+            real_hotels.sort(key=lambda x: (-x['rating'], x['price']))
+            res['Hotels'] = real_hotels[:5] # Top 5
+        else:
+            # Fallback if OSM returns nothing (mock)
+            budget = res.get('Budget', 'Medium')
+            hotels_pool = {
+                "Low": ["Zostel", "Local Guesthouse", "Backpacker Hostel", "City Lodge", "YMCA"],
+                "Medium": ["Ginger Hotel", "Treebo Trend", "Standard Boutique Hotel", "Lemon Tree", "Ibis Styles"],
+                "High": ["Taj Resorts", "The Oberoi", "Luxury Villa", "Marriott", "Hyatt Regency"]
+            }
+            names = random.sample(hotels_pool.get(budget, hotels_pool["Medium"]), 3)
+            # Convert simple strings to dict structure for consistency
+            res['Hotels'] = [{"name": n, "rating": 4.0, "price": 0, "address": "City Center"} for n in names]
+        
+        # Text fields
+        res['about'] = enriched.get('about') if enriched else res.get('Description')
+        res['map'] = enriched.get('map') if enriched else res.get('Map_Link')
+        
+        return res
 
     def _generate_itinerary(self, place_data, days):
         """
-        Rule-based itinerary generation based on destination metadata (Tags/Budget).
+        Rule-based itinerary generation based on destination metadata.
         """
         itinerary = []
         name = place_data['Place']
-        tags = place_data.get('Tags', '')
+        tags = place_data.get('Activities', '') + " " + place_data.get('Category', '')
         budget = place_data.get('Budget', 'Medium')
         
-        # Stay rules (based on budget)
         hotels = {
             "Low": ["Zostel", "Local Guesthouse", "Backpacker Hostel"],
             "Medium": ["Ginger Hotel", "Treebo Trend", "Standard Boutique Hotel"],
@@ -98,32 +206,26 @@ class RecommendationEngine:
         }
         suggested_hotel = random.choice(hotels.get(budget, hotels["Medium"]))
 
-        # Activity rules (based on tags)
         for day in range(1, days + 1):
             day_plan = {
                 "Day": day,
                 "Morning": f"Explore the scenic spots of {name}.",
-                "Afternoon": f"Enjoy local {budget}-friendly cuisine and relax.",
-                "Evening": f"Visit local markets or cultural centers.",
-                "Night": f"Dinner at a highly-rated restaurant.",
+                "Afternoon": f"Enjoy local {budget}-friendly cuisine.",
+                "Evening": f"Relaxing evening walk.",
+                "Night": f"Dinner at a local favorite.",
                 "Hotel": suggested_hotel if day == 1 else "Same as Day 1",
-                "EstimatedCost": place_data.get("Price_Day", 3000)
             }
             
             if "Beach" in tags:
                 if day == 1:
-                    day_plan["Morning"] = "Visit the main beach for sunrise and morning walk."
-                    day_plan["Afternoon"] = "Relax at a beach shack with coconut water."
-                else:
-                    day_plan["Morning"] = "Water sports activities (Jet Ski, Parasailing)."
-                    day_plan["Afternoon"] = "Explore hidden coves and quieter beaches."
-            elif any(t in tags for t in ["Mountain", "Adventure", "Nature"]):
+                    day_plan["Morning"] = "Sunrise by the ocean."
+                    day_plan["Afternoon"] = "Water sports or beach volley."
+                elif day == 2:
+                     day_plan["Morning"] = "Visit nearby coastal villages."
+            elif "Hill Station" in tags or "Mountain" in tags:
                 if day == 1:
-                    day_plan["Morning"] = "Short trek to a panoramic viewpoint."
-                    day_plan["Afternoon"] = "Visit a local monastery or temple."
-                else:
-                    day_plan["Morning"] = "Full day excursion to higher altitudes."
-                    day_plan["Afternoon"] = "Adventure activities like paragliding or rock climbing."
+                    day_plan["Morning"] = "Trek to the highest viewpoint."
+                    day_plan["Afternoon"] = "Visit tea/coffee plantations."
                 
             itinerary.append(day_plan)
             

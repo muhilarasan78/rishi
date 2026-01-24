@@ -49,6 +49,13 @@ def state_detail(state_name):
     destinations = engine.get_destinations_by_state(state_name)
     return render_template('state_detail.html', state_name=state_name, destinations=destinations)
 
+@app.route('/place/<place_name>')
+def place_detail(place_name):
+    place = engine.get_place_details(place_name)
+    if not place:
+        return "Place not found", 404
+    return render_template('place_detail.html', place=place)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
 

@@ -1,0 +1,71 @@
+Place,State,District,Category,Activities,Budget,Duration_Suitability
+Taj Mahal,Uttar Pradesh,Agra,Heritage,Monument Tour, Construction History, Photography,Medium,1 day
+Red Fort,Delhi,Delhi,Heritage,Architecture, Light show, History,Medium,1 day
+Golden Temple,Punjab,Amritsar,Spiritual,Temple visit, Langar, Lake walk,Low,1-2 days
+Amer Fort,Rajasthan,Jaipur,Heritage,Elephant ride, Fort view, Photography,Medium,1 day
+Hawa Mahal,Rajasthan,Jaipur,Heritage,Photography, Architecture walk, Market shopping,Medium,1 day
+Humayun's Tomb,Delhi,Delhi,Heritage,Garden walk, History, Photography,Low,1 day
+Qutub Minar,Delhi,Delhi,Heritage,Complex tour, Photography, History,Low,1 day
+Mysore Palace,Karnataka,Mysore,Heritage,Palace illumination, Museum, Culture,Medium,1-2 days
+India Gate,Delhi,Delhi,Heritage,Evening walk, Picnic, Photography,Low,1 day
+Aguada Fort,Goa,North Goa,Heritage,History, Sea view, Lighthouse,Low,1 day
+Gateway of India,Maharashtra,Mumbai City,Heritage,Sea view, Ferry ride, Photography,High,1 day
+Mehrangarh Fort,Rajasthan,Jodhpur,Heritage,Museum, Viewpoint, Ziplining,Medium,1-2 days
+Meenakshi Temple,Tamil Nadu,Madurai,Spiritual,Temple visit, Architecture, Culture,Low,1-2 days
+Statue of Unity,Gujarat,Narmada,Heritage,Statue tour, Museum, Valley of Flowers,Medium,1 day
+Kamakhya Temple,Assam,Guwahati,Spiritual,Temple visit, History, Culture,Medium,1 day
+Trimbakeshwar Temple,Maharashtra,Nashik,Spiritual,Jyotirlinga visit, Rituals,Low,1 day
+Mahakaleshwar Temple,Madhya Pradesh,Ujjain,Spiritual,Jyotirlinga visit, Bhasma Aarti,Low,1-2 days
+Baga Beach,Goa,North Goa,Beach,Nightlife, Water sports, Shacks,Medium,3-5 days
+Shaniwar Wada,Maharashtra,Pune,Heritage,History, Fort ruins, Light show,Low,1 day
+Promenade Beach,Puducherry,Puducherry,Beach,Walking, Sunrise, Cafe hopping,Medium,2-3 days
+Mudumalai National Park,Tamil Nadu,Nilgiris,Wildlife,Safari, Nature walk, Camping,Medium,2 days
+Ellora Caves,Maharashtra,Aurangabad,Heritage,Cave exploration, Architecture, History,Medium,1-2 days
+Charminar,Telangana,Hyderabad,Heritage,City view, Shopping, History,Medium,1 day
+Prem Mandir,Uttar Pradesh,Mathura,Spiritual,Light show, Temple visit, Gardens,Low,1 day
+Manali,Himachal Pradesh,Kullu,Hill Station,Snow, Paragliding, River rafting,Medium,4-5 days
+Leh Ladakh,Jammu & Kashmir,Leh,Adventure,Biking, Monasteries, Scenic drives,High,6-10 days
+Coorg,Karnataka,Kodagu,Hill Station,Coffee plantations, Trekking, Waterfall,Medium,3-4 days
+Andaman Islands,Andaman & Nicobar,Port Blair,Beach,Scuba diving, Snorkeling, Relaxing,High,5-7 days
+Udaipur City Palace,Rajasthan,Udaipur,Heritage,Lake view, History, Boat ride,High,2-3 days
+Srinagar,Jammu & Kashmir,Srinagar,Hill Station,Dal Lake, Houseboat, Gardens,High,3-4 days
+Gangtok,Sikkim,East Sikkim,Hill Station,Monasteries, Viewpoints, Ropeway,Medium,3-4 days
+Munnar,Kerala,Idukki,Hill Station,Tea gardens, Trekking, Nature,Medium,3-4 days
+Varkala,Kerala,Thiruvananthapuram,Beach,Cliff views, Paragliding, Relaxing,Medium,2-3 days
+Mcleodganj,Himachal Pradesh,Kangra,Hill Station,Tibetan culture, Trekking, Meditation,Medium,2-3 days
+Rishikesh,Uttarakhand,Dehradun,Adventure,Rafting, Yoga, Camping,Low,2-3 days
+Alleppey,Kerala,Alappuzha,Backwaters,Houseboat, Canoeing, Village walk,High,2-3 days
+Darjeeling,West Bengal,Darjeeling,Hill Station,Toy train, Tea gardens, Sunrise,Medium,3-4 days
+Pondicherry,Puducherry,Puducherry,Heritage,French colony, Beach, Auroville,Medium,2-3 days
+Khajuraho,Madhya Pradesh,Chhatarpur,Heritage,Temple art, History, Light show,Medium,1-2 days
+Chennai Marina Beach,Tamil Nadu,Chennai,Beach,Evening walk, Street food, Sunrise,Low,1 day
+Vaishno Devi,Jammu & Kashmir,Reasi,Spiritual,Trekking, Temple visit, Views,Medium,2-3 days
+Haridwar,Uttarakhand,Haridwar,Spiritual,Ganga Aarti, Temple hop, Culture,Low,1-2 days
+Kanyakumari,Tamil Nadu,Kanyakumari,Coastal,Sunrise, Ferry ride, Memorial,Low,1-2 days
+Kochi Fort,Kerala,Ernakulam,Heritage,Chinese fishing nets, History, Art,Medium,2 days
+Ahmedabad Sabarmati,Gujarat,Ahmedabad,Heritage,Ashram visit, Riverfront, Texture,Medium,1-2 days
+Kanha National Park,Madhya Pradesh,Mandla,Wildlife,Tiger safari, Jungle stay, Nature,Medium,2-3 days
+Hampi,Karnataka,Vijayanagara,Heritage,Ruins, Bouldering, History,Low,2-3 days
+Varanasi Ghats,Uttar Pradesh,Varanasi,Spiritual,Ganga Aarti, Boat ride, Culture,Low,2-3 days
+Goa Palolem,Goa,South Goa,Beach,Kayaking, Relaxing, Dolphin watching,Medium,3-5 days
+Jaisalmer Fort,Rajasthan,Jaisalmer,Heritage,Desert safari, Fort stay, Camel ride,Medium,2-3 days
+Ooty,Tamil Nadu,Nilgiris,Hill Station,Boating, Gardens, Toy train,Medium,3-4 days
+Kodaikanal,Tamil Nadu,Dindigul,Hill Station,Cycling, Lake view, Trekking,Medium,2-3 days
+Mahabalipuram,Tamil Nadu,Chengalpattu,Heritage,Rock carvings, Beach, History,Low,1 day
+Yercaud,Tamil Nadu,Salem,Hill Station,Viewpoints, Boating, Drive,Low,1-2 days
+Rameshwaram,Tamil Nadu,Ramanathapuram,Spiritual,Temple visit, Pamban bridge, Sea,Low,1 day
+Wayanad,Kerala,Wayanad,Nature,Caves, Waterfalls, Wildlife,Medium,3-4 days
+Kasol,Himachal Pradesh,Kullu,Nature,Trekking, Cafe hopping, River sit,Low,2-3 days
+Nainital,Uttarakhand,Nainital,Hill Station,Lake boating, Ropeway, View,Medium,2-3 days
+Mussoorie,Uttarakhand,Dehradun,Hill Station,Mall road, Falls, Nature,Medium,2-3 days
+Lonavala,Maharashtra,Pune,Hill Station,Monsoon, Caves, Forts,Low,1-2 days
+Ajanta Caves,Maharashtra,Aurangabad,Heritage,Cave paintings, History, Art,Medium,1 day
+Konark Sun Temple,Odisha,Puri,Heritage,Architecture, History, Beach nearby,Low,1 day
+Kaziranga National Park,Assam,Golaghat,Wildlife,Rhino safari, Nature, Birding,Medium,2-3 days
+Gulmarg,Jammu & Kashmir,Baramulla,Hill Station,Skiing, Gondola, Snow,High,2-3 days
+Dal Lake,Jammu & Kashmir,Srinagar,Nature,Shikara ride, Floating market, Sunset,High,1 day
+Ramoji Film City,Telangana,Hyderabad,Entertainment,Film sets, Theme park, Shows,High,1 day
+Araku Valley,Andhra Pradesh,Visakhapatnam,Nature,Coffee museum, Caves, Train ride,Low,2 days
+Gandikota,Andhra Pradesh,Kadapa,Nature,Canyon view, Fort, Camping,Low,1 day
+Tawang Monastery,Arunachal Pradesh,Tawang,Heritage,Monastery, Snow, War memorial,High,3-4 days
+Victoria Memorial,West Bengal,Kolkata,Heritage,Museum, Gardens, History,Low,1 day

@@ -127,47 +127,82 @@ function renderResults(data) {
         const card = document.createElement('div');
         card.className = 'destination-card';
 
-        const dynamicImg = `https://source.unsplash.com/featured/800x600?${place.Place.split(' ')[0].toLowerCase()},travel&sig=${index}`;
-        const tagsHtml = place.Tags.split(',').map(tag => `<span class="tag-pill">${tag.trim()}</span>`).join('');
+        // Use Dynamic API Images (Unsplash)
+        // Fallback to legacy Image or placeholder
+        let imgSrc = "https://via.placeholder.com/800x500?text=No+Image";
+        if (place.images && place.images.length > 0) {
+            imgSrc = place.images[0];
+        } else if (place.Image && place.Image !== "https://via.placeholder.com/800x400?text=No+Image") {
+            imgSrc = place.Image;
+        }
+
+        const tagsHtml = place.Tags ? place.Tags.split(',').map(tag => `<span class="tag-pill">${tag.trim()}</span>`).join('') : '';
 
         let itineraryHtml = '';
-        place.Itinerary.forEach((day, dIdx) => {
-            itineraryHtml += `
-                <div class="day-item ${dIdx === 0 ? 'active' : ''}">
-                    <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
-                        <span>Day ${day.Day}: Overview</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="day-body">
-                        <p><strong>Morning:</strong> ${day.Morning}</p>
-                        <p><strong>Afternoon:</strong> ${day.Afternoon}</p>
-                        <p><strong>Evening:</strong> ${day.Evening}</p>
-                        <p><strong>Night:</strong> ${day.Night}</p>
-                        <div style="margin-top:10px; padding:10px; background:#f1f5f9; border-radius:8px; font-weight:600; font-size: 0.85rem;">
-                            <i class="fas fa-hotel"></i> Stay: ${day.Hotel}
+        if (place.Itinerary) {
+            place.Itinerary.forEach((day, dIdx) => {
+                itineraryHtml += `
+                    <div class="day-item ${dIdx === 0 ? 'active' : ''}">
+                        <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
+                            <span>Day ${day.Day}: Overview</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="day-body">
+                            <p><strong>Morning:</strong> ${day.Morning}</p>
+                            <p><strong>Afternoon:</strong> ${day.Afternoon}</p>
+                            <p><strong>Evening:</strong> ${day.Evening}</p>
+                            <div style="margin-top:10px; padding:10px; background:#f1f5f9; border-radius:8px; font-weight:600; font-size: 0.85rem;">
+                                <i class="fas fa-hotel"></i> Stay: ${day.Hotel}
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-        });
+                `;
+            });
+        }
+
+        // Use Dynamic Map Link
+        const mapLink = place.map ? place.map : (place.Map_Link || `https://www.google.com/maps/search/?api=1&query=${place.name || place.Place}`);
+
+        // text content
+        const displayName = place.name || place.Place;
+        const description = place.about || place.Description || "Explore this amazing destination.";
 
         card.innerHTML = `
-            <div class="card-img">
-                <img src="${dynamicImg}" alt="${place.Place}" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80'">
-            </div>
+            <a href="/place/${displayName}" class="card-img-link" style="display: block; position: relative; overflow: hidden;">
+                <div class="card-img">
+                    <img src="${imgSrc}" alt="${displayName}" 
+                        onerror="this.onerror=null; this.src='https://via.placeholder.com/800x500?text=Image+Load+Error'">
+                    <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; pointer-events: none;">
+                        <i class="fas fa-images"></i> View Gallery
+                    </div>
+                </div>
+            </a>
             <div class="card-body">
-                <h3 class="card-title">${place.Place}</h3>
+                <a href="/place/${displayName}" style="text-decoration: none; color: inherit;">
+                    <h3 class="card-title hover-underline">${displayName}</h3>
+                </a>
                 <div class="tag-list">${tagsHtml}</div>
-                <p class="card-desc">${place.Description}</p>
+                <p class="card-desc">${description}</p>
                 
                 <div class="itinerary-section">
                     <h4><i class="fas fa-route"></i> Your Personalized Plan</h4>
                     ${itineraryHtml}
                 </div>
 
+                <!-- Review Section -->
+                <div style="margin-top: 1rem; padding: 0.75rem; background: #fffbe6; border-left: 4px solid #f59e0b; border-radius: 4px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 0.25rem;">
+                        <span style="font-weight: 700; font-size: 0.9rem; margin-right: 0.5rem;">Traveler Review:</span>
+                        <div style="color: #f59e0b; font-size: 0.8rem;">
+                            ${getStarRating(place.Rating || 4.5)}
+                        </div>
+                    </div>
+                    <p style="font-style: italic; font-size: 0.9rem; color: #4b5563;">"${place.Review || "A wonderful place to visit!"}"</p>
+                </div>
+
                 <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
                     <span style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">₹${place.Price_Day}/day</span>
-                    <a href="https://www.google.com/maps/search/?api=1&query=${place.Place}" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">
+                    <a href="${mapLink}" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">
                         <i class="fas fa-map-marked-alt"></i> Maps
                     </a>
                 </div>
@@ -176,4 +211,18 @@ function renderResults(data) {
 
         container.appendChild(card);
     });
+}
+
+function getStarRating(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    let html = '';
+    for (let i = 0; i < fullStars; i++) {
+        html += '<i class="fas fa-star"></i>';
+    }
+    if (hasHalfStar) {
+        html += '<i class="fas fa-star-half-alt"></i>';
+    }
+    // Fill remaining with empty stars if needed? detailed usually just shows positive.
+    return html;
 }
